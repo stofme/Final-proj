@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briefify — Generate Real Design briefs. Build a Real Portfolio.</title>
+  
+  <!-- Font Integration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              50: '#F5F2ED',    // Warm editorial off-white
+              100: '#EAE7E0',   // Light active blocks
+              200: 'rgba(26, 26, 26, 0.1)',   // Soft margins / dividers
+              300: 'rgba(26, 26, 26, 0.18)',  // Borders
+              400: 'rgba(26, 26, 26, 0.5)',   // Secondary text
+              500: 'rgba(26, 26, 26, 0.65)',  // Body text color
+              600: 'rgba(26, 26, 26, 0.75)',  // Semi-dark text
+              700: '#2D2D2D',                 // Dark grey labels
+              800: '#1A1A1A',                 // Editorial Black labels
+              900: '#1A1A1A',                 // Main display headlines
+            },
+            indigo: {
+              50: '#EAE7E0',    // Warm linen container background
+              100: '#DCD8CF',   // Focus state
+              200: 'rgba(26, 26, 26, 0.08)',
+              500: '#1A1A1A',   // Slate Charcoal
+              600: '#1A1A1A',   // Fill primary CTA
+              700: '#2D2D2D',   // CTA Hover
+              800: '#1A1A1A',
+              900: '#1A1A1A',
+              950: '#151515',   // Ready to design banner background
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 geometric-grid min-h-screen flex flex-col selection:bg-slate-100 selection:text-slate-900">
+
+  <!-- Interactive Header -->
+  <header id="app-header" class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- Logo Branding -->
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-7 h-7 rounded bg-indigo-600 flex items-center justify-center text-white font-serif italic text-base font-black shadow-sm group-hover:scale-105 transition-transform">
+          b
+        </div>
+        <span class="text-xl font-serif italic font-black tracking-tight text-slate-900">Briefify</span>
+      </a>
+
+      <!-- Page Links -->
+      <nav id="navbar" class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="active-nav hover:text-indigo-600 transition-colors">Home</a>
+        <a href="generator.html" class="hover:text-indigo-600 transition-colors">Generator</a>
+        <a href="saved.html" class="hover:text-indigo-600 transition-colors">My Projects</a>
+        <a href="about.html" class="hover:text-indigo-600 transition-colors">About</a>
+      </nav>
+
+      <!-- Connection Actions -->
+      <div class="flex items-center gap-3">
+        <a href="saved.html" class="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors px-3 py-2">
+          Sign In
+        </a>
+        <a href="generator.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 flex items-center gap-1.5">
+          Get Started <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Presentation Column -->
+  <main class="flex-grow pt-12 md:pt-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Promotional Statement -->
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+        <div class="inline-flex items-center gap-2 bg-indigo-50 border border-slate-200 text-indigo-600 text-[10px] font-bold tracking-[0.2em] px-4 py-1.5 rounded-full mb-8 shadow-sm">
+          <span class="material-symbols-outlined text-[13px]">verified</span> THE DESIGNER'S DOCK
+        </div>
+        <h1 class="text-5xl md:text-8xl font-serif font-black tracking-tighter text-slate-900 leading-[0.9] mb-8">
+          DESIGN<br class="hidden md:block"> AS A <span class="italic text-indigo-600">PROCESS.</span>
+        </h1>
+        <p class="text-base md:text-lg text-slate-500 font-medium leading-relaxed mb-10 max-w-xl mx-auto">
+          Stop staring at a blank canvas. Generate professional creative briefs and build your portfolio with curated challenges designed to push your limits.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <a href="generator.html" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[20px]">auto_awesome</span> Generate Brief
+          </a>
+          <a href="about.html" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-700 font-bold px-8 py-3.5 rounded-xl transition-all border border-slate-200 flex items-center justify-center gap-1.5">
+            Learn More
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual Asset Block -->
+      <div class="mb-24 animate-fade-in" style="animation-delay: 150ms;">
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-2xl relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-amber-500"></div>
+          
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-4 mb-6 gap-4">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <span class="h-4 w-[1px] bg-slate-200"></span>
+              <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider font-mono">Workspace.draft</span>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-lg text-slate-500 text-xs font-semibold">
+              <span class="material-symbols-outlined text-[16px] text-slate-400">lock</span> Local Sandbox
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-8 space-y-6">
+              <div class="space-y-2">
+                <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Health & Beauty</span>
+                <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight">Lumiere Skincare Rebrand</h3>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Objective is to establish market authority in the "Clean Medical" clinical skincare niche by creating a high-fidelity visual identity system. Deliverables require primary packaging blueprints, sustainable outer box materials, and a complete system of digital guidelines ready for high-fidelity portfolio uploads.
+              </p>
+              <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100/50 flex items-start gap-3">
+                <span class="material-symbols-outlined text-indigo-600">tips_and_updates</span>
+                <div>
+                  <h4 class="text-xs font-bold text-indigo-900 mb-1">DESIGN FOCUS</h4>
+                  <p class="text-xs text-indigo-700/80 leading-relaxed">
+                    Emphasize whitespace, tactile materials, and geometric hierarchy. Keep structural grids aligned to clinical research aesthetics.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-4 bg-slate-50 border border-slate-100 rounded-xl p-5 space-y-5">
+              <div>
+                <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-2">TYPOGRAPHY CHOICE</span>
+                <p class="text-xl font-bold leading-tight font-serif text-slate-800">Playfair Display</p>
+                <p class="text-xs text-slate-400 leading-tight">Serif Pairing (Hero Titles)</p>
+              </div>
+              <div class="border-t border-slate-200/50 pt-4">
+                <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-2">SPECTRUM TONE</span>
+                <div class="flex items-center gap-2">
+                  <span class="w-8 h-8 rounded-md bg-[#F8F9FA] border border-slate-200 block shadow-sm"></span>
+                  <span class="w-8 h-8 rounded-md bg-[#4D41DF] block shadow-sm"></span>
+                  <span class="w-8 h-8 rounded-md bg-[#E1E3E4] block shadow-sm"></span>
+                  <span class="w-8 h-8 rounded-md bg-[#2E3132] block shadow-sm"></span>
+                </div>
+              </div>
+              <div class="border-t border-slate-200/50 pt-4 flex justify-between items-center text-xs">
+                <span class="text-slate-400">Created At</span>
+                <span class="text-slate-700 font-bold">Workspace Default</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Value Props Grid / Bento -->
+      <section class="py-12 border-t border-slate-100">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-indigo-600 text-xs font-extrabold uppercase tracking-widest block mb-2">THE PLATFORM EDGE</span>
+          <h2 class="text-3xl font-extrabold text-slate-900">Professional Grade Tools Only</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+              </div>
+              <h3 class="font-extrabold text-lg text-slate-800 mb-2">Creative Generator</h3>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                Deeply researched industry scenarios featuring strict parameters, realistic goals, and granular target demographics.
+              </p>
+            </div>
+            <a href="generator.html" class="text-xs font-bold text-indigo-600 flex items-center gap-1 hover:gap-1.5 transition-all">Launch engine <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-[20px]">text_fields</span>
+              </div>
+              <h3 class="font-extrabold text-lg text-slate-800 mb-2">Typography Pairings</h3>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                Contextual selection of Google fonts designed to match the psychological tone and voice of the generated assignment.
+              </p>
+            </div>
+            <a href="generator.html" class="text-xs font-bold text-indigo-600 flex items-center gap-1 hover:gap-1.5 transition-all">Preview Pairings <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-[20px]">palette</span>
+              </div>
+              <h3 class="font-extrabold text-lg text-slate-800 mb-2">Color Palette Ideas</h3>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                Curated hex codes based on modern visual standards relevant directly to the workspace's commercial sector.
+              </p>
+            </div>
+            <a href="generator.html" class="text-xs font-bold text-indigo-600 flex items-center gap-1 hover:gap-1.5 transition-all">Curate Palettes <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 card-hover flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-[20px]">bookmarks</span>
+              </div>
+              <h3 class="font-extrabold text-lg text-slate-800 mb-2">Portfolio Practice</h3>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                Organize your compiled deliverables into a persistent workspace ready to translate to your physical resume site.
+              </p>
+            </div>
+            <a href="saved.html" class="text-xs font-bold text-indigo-600 flex items-center gap-1 hover:gap-1.5 transition-all">Inspect projects <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grid Visual Showcases/Featured Brief Section with Curved Monitor mockup -->
+      <section class="py-16 border-t border-slate-100">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-6 md:p-10 text-white relative overflow-hidden shadow-2xl h-[420px] flex flex-col justify-between group">
+            <div class="absolute inset-0 bg-cover bg-center opacity-20 mix-blend-overlay group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop');"></div>
+            <div class="relative z-10">
+              <span class="text-[10px] tracking-widest uppercase font-bold text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20">Featured Layout</span>
+              <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight mt-6 max-w-lg mb-4">FinTech Dashboard for Sustainable Banking</h3>
+              <p class="text-xs text-slate-350 leading-relaxed max-w-md">
+                "Vortex Global requested a high-performance workspace dashboard mapping clean carbon indices against secondary retail trader assets."
+              </p>
+            </div>
+            <div class="relative z-10 flex gap-4 items-center">
+              <div class="flex items-center gap-2">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#0F172A] border border-white/20"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-[#6366F1]"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-[#10B981]"></span>
+              </div>
+              <span class="h-4 w-[1px] bg-white/20"></span>
+              <span class="text-xs font-mono text-slate-400 uppercase">DARK MODERN MODE</span>
+            </div>
+          </div>
+          
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 card-hover">
+              <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-2">01. INDUSTRY INSIGHT</span>
+              <h3 class="font-extrabold text-lg text-slate-800 mb-2">Real Market Trends</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Our scenarios are synthesized based on actual market fluctuations. From sustainable luxury cosmetic rebrands to clean green decentralization indexes.
+              </p>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 card-hover">
+              <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-2">02. DOCKING COMPATIBLE</span>
+              <h3 class="font-extrabold text-lg text-slate-800 mb-2">Smart Sizing Widgets</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Simulated deadlines and realistic client constraints are formatted to scale cleanly whether in full desk view or mobile.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Four Steps to Mastery Section -->
+      <section class="py-16 border-t border-slate-100">
+        <div class="text-center max-w-xl mx-auto mb-16">
+          <span class="text-indigo-600 text-xs font-extrabold uppercase tracking-widest block mb-2">THE METHODOLOGY</span>
+          <h2 class="text-3xl font-extrabold text-slate-900">Four Steps to Mastery</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center space-y-4">
+            <div class="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-extrabold mx-auto">
+              1
+            </div>
+            <h3 class="font-bold text-base text-slate-800">Generate</h3>
+            <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+              Hit the generator to trigger a highly specialized industry scenario matching modern parameters and colorways.
+            </p>
+          </div>
+
+          <div class="text-center space-y-4">
+            <div class="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-extrabold mx-auto">
+              2
+            </div>
+            <h3 class="font-bold text-base text-slate-800">Explore</h3>
+            <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+              Evaluate specific font pairings, inspect moodboards, and analyze detailed design restrictions.
+            </p>
+          </div>
+
+          <div class="text-center space-y-4">
+            <div class="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-extrabold mx-auto">
+              3
+            </div>
+            <h3 class="font-bold text-base text-slate-800">Create</h3>
+            <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+              Open your preferred tool (Figma, Adobe XD, Illustrator) and construct an elegant design addressing the goals.
+            </p>
+          </div>
+
+          <div class="text-center space-y-4">
+            <div class="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-extrabold mx-auto">
+              4
+            </div>
+            <h3 class="font-bold text-base text-slate-800">Add to Portfolio</h3>
+            <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+              Compile your structured deliverables and visual outputs to upload as a highly detailed professional case study.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ready to design? Call to action banner at bottom -->
+      <section class="py-12 mb-16">
+        <div class="bg-[#1A1A1A] border border-slate-200/20 rounded-2xl p-8 md:p-12 text-center text-[#F5F2ED] relative overflow-hidden shadow-sm">
+          <div class="absolute inset-0 bg-cover bg-center opacity-5" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop');"></div>
+          <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+            <h2 class="text-3xl md:text-5xl font-serif italic font-black tracking-tight text-[#F5F2ED]">Ready to master your design flow?</h2>
+            <p class="text-slate-100/75 text-xs tracking-wider max-w-md mx-auto leading-relaxed">
+              Join 10,000+ designers logging on every single week to refine their portfolio projects and commercial focus.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4">
+              <input type="email" placeholder="Enter your email address" class="flex-1 px-4 py-3 rounded bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-white text-xs font-medium" />
+              <button class="bg-[#F5F2ED] text-[#1A1A1A] hover:bg-[#EAE7E0] font-bold px-6 py-3 rounded transition-all text-[10px] uppercase tracking-widest whitespace-nowrap" onclick="showToast('Thank you for subscribing to our visual newsletters', 'success')">
+                Join Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Solid Page Footer -->
+  <footer class="bg-white border-t border-slate-100 py-12 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="space-y-2 text-center md:text-left">
+        <div class="flex items-center gap-2 justify-center md:justify-start">
+          <div class="w-6 h-6 rounded-md bg-indigo-600 flex items-center justify-center text-white font-extrabold text-sm shadow-sm">
+            B
+          </div>
+          <span class="text-base font-extrabold text-slate-800 tracking-tight">Briefify</span>
+        </div>
+        <p class="text-slate-400">© 2026 Briefify Labs. Empowering structured creative iterations.</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6 text-slate-400 uppercase font-bold tracking-wider text-[10px]">
+        <a href="#" class="hover:text-indigo-600 transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">Contact Support</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">Twitter</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Link script relatively as required to work flawlessly under any browser double-click -->
+  <script src="script.js"></script>
+</body>
+</html>

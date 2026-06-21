@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briefify — My Document Safe Storage Space</title>
+  
+  <!-- Font Integration -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              50: '#F5F2ED',    // Warm editorial off-white
+              100: '#EAE7E0',   // Light active blocks
+              200: 'rgba(26, 26, 26, 0.1)',   // Soft margins / dividers
+              300: 'rgba(26, 26, 26, 0.18)',  // Borders
+              400: 'rgba(26, 26, 26, 0.5)',   // Secondary text
+              500: 'rgba(26, 26, 26, 0.65)',  // Body text color
+              600: 'rgba(26, 26, 26, 0.75)',  // Semi-dark text
+              700: '#2D2D2D',                 // Dark grey labels
+              800: '#1A1A1A',                 // Editorial Black labels
+              900: '#1A1A1A',                 // Main display headlines
+            },
+            indigo: {
+              50: '#EAE7E0',    // Warm linen container background
+              100: '#DCD8CF',   // Focus state
+              200: 'rgba(26, 26, 26, 0.08)',
+              500: '#1A1A1A',   // Slate Charcoal
+              600: '#1A1A1A',   // Fill primary CTA
+              700: '#2D2D2D',   // CTA Hover
+              800: '#1A1A1A',
+              900: '#1A1A1A',
+              950: '#151515',   // Bottom CTA banner bg
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 geometric-grid min-h-screen flex flex-col selection:bg-slate-100 selection:text-slate-900">
+
+  <!-- Interactive Header -->
+  <header id="app-header" class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- Logo Branding -->
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-7 h-7 rounded bg-indigo-600 flex items-center justify-center text-white font-serif italic text-base font-black shadow-sm group-hover:scale-105 transition-transform">
+          b
+        </div>
+        <span class="text-xl font-serif italic font-black tracking-tight text-slate-900">Briefify</span>
+      </a>
+
+      <!-- Page Links -->
+      <nav id="navbar" class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-indigo-600 transition-colors">Home</a>
+        <a href="generator.html" class="hover:text-indigo-600 transition-colors">Generator</a>
+        <a href="saved.html" class="active-nav hover:text-indigo-600 transition-colors">My Projects</a>
+        <a href="about.html" class="hover:text-indigo-600 transition-colors">About</a>
+      </nav>
+
+      <!-- Connection Actions -->
+      <div class="flex items-center gap-3">
+        <a href="saved.html" class="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors px-3 py-2">
+          Sign In
+        </a>
+        <a href="generator.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 flex items-center gap-1.5">
+          Get Started <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- My Saved Projects Section -->
+  <main class="flex-grow py-8 md:py-12 animate-fade-in">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Headline Intro Layer with filter input -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 pb-8 border-b border-slate-200/60">
+        <div>
+          <span class="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider block w-max mb-3">Workspace Index</span>
+          <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 mb-1">My Projects</h1>
+          <p class="text-slate-400 font-medium text-xs leading-relaxed max-w-xl">
+            Manage and access your curated creative briefs, historical data, and project configurations in one surgical space.
+          </p>
+        </div>
+        
+        <!-- Search filter block -->
+        <div class="w-full md:w-80 flex gap-2">
+          <div class="relative flex-grow">
+            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] select-none">search</span>
+            <input id="saved-search" type="text" placeholder="Search projects..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs text-slate-800 placeholder-slate-400 font-medium shadow-sm transition-all" />
+          </div>
+          <button class="bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 px-3.5 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center cursor-pointer active:scale-95" title="Filter Settings">
+            <span class="material-symbols-outlined text-[18px]">filter_list</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Saved Item Cards Grid -->
+      <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamic list entries instantiated via JS -->
+      </div>
+
+      <!-- Empty state card -->
+      <div id="empty-state" class="hidden max-w-md mx-auto text-center py-16 px-6 bg-white border border-slate-100 rounded-3xl shadow-sm space-y-6">
+        <div class="w-16 h-16 rounded-full bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+          <span class="material-symbols-outlined text-[32px]">folder_open</span>
+        </div>
+        <div class="space-y-2">
+          <h3 class="text-lg font-bold text-slate-800">No saved briefs yet!</h3>
+          <p class="text-slate-450 text-xs leading-relaxed">
+            Generate and bookmark simulated design scopes to build your custom portfolio training database.
+          </p>
+        </div>
+        <a href="generator.html" class="inline-flex bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md active:scale-95 items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px]">add</span> Create Project Brief
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-100 py-12 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="space-y-2 text-center md:text-left">
+        <div class="flex items-center gap-2 justify-center md:justify-start">
+          <div class="w-6 h-6 rounded-md bg-indigo-600 flex items-center justify-center text-white font-extrabold text-sm shadow-sm">
+            B
+          </div>
+          <span class="text-base font-extrabold text-slate-800 tracking-tight">Briefify</span>
+        </div>
+        <p class="text-slate-400">© 2026 Briefify Labs. Empowering structured creative iterations.</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6 text-slate-400 uppercase font-bold tracking-wider text-[10px]">
+        <a href="#" class="hover:text-indigo-600 transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">Contact Support</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">Twitter</a>
+        <a href="#" class="hover:text-indigo-600 transition-colors">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Code Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

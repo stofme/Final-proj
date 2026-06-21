@@ -1,0 +1,6 @@
+{
+  "name": "Briefify",
+  "description": "Generate surgical-grade creative briefs in seconds. Powered by industry-leading design paradigms.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
