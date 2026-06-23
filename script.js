@@ -259,68 +259,26 @@ const BRIEFS_POOL = [
   }
 ];
 
-// Robust, sandbox-safe storage wrapper with in-memory fallback
-const storageFallback = {};
-
-function safeGetItem(key) {
-  try {
-    return localStorage.getItem(key);
-  } catch (e) {
-    console.warn("localStorage.getItem failed, using in-memory fallback:", e);
-    return storageFallback[key] || null;
-  }
-}
-
-function safeSetItem(key, value) {
-  try {
-    localStorage.setItem(key, value);
-  } catch (e) {
-    console.warn("localStorage.setItem failed, using in-memory fallback:", e);
-    storageFallback[key] = String(value);
-  }
-}
-
 // Local Storage Helper Functions
 function getSavedProjects() {
-  try {
-    const data = safeGetItem("saved_projects");
-    const parsed = data ? JSON.parse(data) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (e) {
-    console.error("Failed to parse saved projects:", e);
-    return [];
-  }
+  const data = localStorage.getItem("saved_projects");
+  return data ? JSON.parse(data) : [];
 }
 
 function saveProjects(projects) {
-  safeSetItem("saved_projects", JSON.stringify(projects));
+  localStorage.setItem("saved_projects", JSON.stringify(projects));
 }
 
 function getCurrentBrief() {
-  const data = safeGetItem("current_brief");
+  const data = localStorage.getItem("current_brief");
   if (data) {
-    try {
-      const parsed = JSON.parse(data);
-      if (parsed && typeof parsed === 'object') {
-        if (parsed.id) {
-          const found = BRIEFS_POOL.find(b => b.id === parsed.id);
-          if (found) {
-            return found;
-          }
-        }
-        if (parsed.title && parsed.tags && parsed.typography && parsed.palette) {
-          return parsed;
-        }
-      }
-    } catch (e) {
-      console.error("Failed to parse current brief:", e);
-    }
+    return JSON.parse(data);
   }
   return BRIEFS_POOL[0];
 }
 
 function saveCurrentBrief(brief) {
-  safeSetItem("current_brief", JSON.stringify(brief));
+  localStorage.setItem("current_brief", JSON.stringify(brief));
 }
 
 // Generate New Brief State Manager
@@ -347,7 +305,7 @@ function renderGenerator(brief) {
   container.innerHTML = `
     <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
       <div>
-        <h2 class="text-3xl font-serif font-black tracking-tight mb-2 text-slate-900">${brief.title}</h2>
+        <h2 class="text-3xl font-serif font-black tracking-tight mb-2 text-slate-905">${brief.title}</h2>
         <div class="flex flex-wrap gap-2">
           ${brief.tags.map(tag => `<span class="bg-[#EAE7E0]/60 text-slate-800 border border-slate-200/70 px-3 py-1 rounded text-[10px] font-bold uppercase tracking-wider">${tag}</span>`).join('')}
         </div>
@@ -561,9 +519,6 @@ function showToast(message, type = "success") {
   }, 2500);
 }
 
-// Bind showToast to window so it's accessible globally from inline HTML events
-window.showToast = showToast;
-
 // Search and Render Code for My Projects Page (saved.html)
 function initSavedProjectsPage() {
   const container = document.getElementById("projects-container");
@@ -620,11 +575,11 @@ function initSavedProjectsPage() {
       card.id = `project-card-${proj.uniqueId}`;
       card.innerHTML = `
         <div class="flex justify-between items-start mb-4">
-          <div class="w-9 h-9 rounded bg-[#EAE7E0] flex items-center justify-center text-slate-800">
+          <div class="w-9 h-9 rounded bg-[#EAE7E0] flex items-center justify-center text-slate-805">
             <span class="material-symbols-outlined text-[18px]">${sectorIcon}</span>
           </div>
           <div>
-            <span class="bg-[#EAE7E0] text-slate-800 border border-slate-200/60 px-2.5 py-1 rounded text-[9px] font-bold uppercase tracking-widest">${proj.category}</span>
+            <span class="bg-[#EAE7E0] text-slate-805 border border-slate-200/60 px-2.5 py-1 rounded text-[9px] font-bold uppercase tracking-widest">${proj.category}</span>
           </div>
         </div>
         <div class="flex-grow">
@@ -704,54 +659,41 @@ function setupGlobalNavigation() {
 }
 
 // Router Event Listeners to bootstrap active pages
-function initializeApp() {
-  try {
-    setupGlobalNavigation();
+document.addEventListener("DOMContentLoaded", function() {
+  setupGlobalNavigation();
 
-    // Detect which page we are on based on DOM elements rather than URL pathnames,
-    // which prevents bugs when URLs are clean or routed customly by the server.
-    const isGeneratorPage = !!document.getElementById("briefContent");
-    const isSavedPage = !!document.getElementById("projects-container");
+  const activePath = window.location.pathname;
 
-    if (isGeneratorPage) {
-      initGeneratorPage();
-    } else if (isSavedPage) {
+  if (activePath.includes("generator.html")) {
+    initGeneratorPage();
+  } else if (activePath.includes("saved.html")) {
+    initSavedProjectsPage();
+  }
+
+  // Pre-populate some projects for the user when they boot the application first time, to make the site look high fidelity!
+  if (!localStorage.getItem("init_run")) {
+    const defaultSaved = [
+      {
+        ...BRIEFS_POOL[0],
+        uniqueId: "lum-aesthetic-saved",
+        dateSaved: "Oct 24, 2026"
+      },
+      {
+        ...BRIEFS_POOL[1],
+        uniqueId: "vor-fintech-saved",
+        dateSaved: "Oct 12, 2026"
+      },
+      {
+        ...BRIEFS_POOL[2],
+        uniqueId: "eco-pulse-saved",
+        dateSaved: "Sep 28, 2026"
+      }
+    ];
+    saveProjects(defaultSaved);
+    localStorage.setItem("init_run", "true");
+    
+    if (activePath.includes("saved.html")) {
       initSavedProjectsPage();
     }
-
-    // Pre-populate some projects for the user when they boot the application first time, to make the site look high fidelity!
-    if (!safeGetItem("init_run")) {
-      const defaultSaved = [
-        {
-          ...BRIEFS_POOL[0],
-          uniqueId: "lum-aesthetic-saved",
-          dateSaved: "Oct 24, 2026"
-        },
-        {
-          ...BRIEFS_POOL[1],
-          uniqueId: "vor-fintech-saved",
-          dateSaved: "Oct 12, 2026"
-        },
-        {
-          ...BRIEFS_POOL[2],
-          uniqueId: "eco-pulse-saved",
-          dateSaved: "Sep 28, 2026"
-        }
-      ];
-      saveProjects(defaultSaved);
-      safeSetItem("init_run", "true");
-      
-      if (isSavedPage) {
-        initSavedProjectsPage();
-      }
-    }
-  } catch (error) {
-    console.error("Initialization error:", error);
   }
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initializeApp);
-} else {
-  initializeApp();
-}
+});
