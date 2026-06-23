@@ -11,50 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
   <!-- Custom Styling -->
   <link rel="stylesheet" href="style.css" />
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            slate: {
-              50: '#F5F2ED',    // Warm editorial off-white
-              100: '#EAE7E0',   // Light active blocks
-              200: 'rgba(26, 26, 26, 0.1)',   // Soft margins / dividers
-              300: 'rgba(26, 26, 26, 0.18)',  // Borders
-              400: 'rgba(26, 26, 26, 0.5)',   // Secondary text
-              500: 'rgba(26, 26, 26, 0.65)',  // Body text color
-              600: 'rgba(26, 26, 26, 0.75)',  // Semi-dark text
-              700: '#2D2D2D',                 // Dark grey labels
-              800: '#1A1A1A',                 // Editorial Black labels
-              900: '#1A1A1A',                 // Main display headlines
-            },
-            indigo: {
-              50: '#EAE7E0',    // Warm linen container background
-              100: '#DCD8CF',   // Focus state
-              200: 'rgba(26, 26, 26, 0.08)',
-              500: '#1A1A1A',   // Slate Charcoal
-              600: '#1A1A1A',   // Fill primary CTA
-              700: '#2D2D2D',   // CTA Hover
-              800: '#1A1A1A',
-              900: '#1A1A1A',
-              950: '#151515',   // Bottom CTA banner bg
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-            serif: ['Playfair Display', 'serif'],
-          }
-        }
-      }
-    }
-  </script>
 </head>
 <body class="bg-slate-50 text-slate-900 geometric-grid min-h-screen flex flex-col selection:bg-slate-100 selection:text-slate-900">
 
@@ -260,6 +218,6 @@
   </footer>
 
   <!-- Code Logic -->
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

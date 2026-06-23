@@ -1,5 +1,34 @@
 /* Style.css - Editorial Aesthetic Minimalist Framework */
 
+@import "tailwindcss";
+
+@theme {
+  --color-slate-50: #F5F2ED;
+  --color-slate-100: #EAE7E0;
+  --color-slate-200: rgba(26, 26, 26, 0.1);
+  --color-slate-300: rgba(26, 26, 26, 0.18);
+  --color-slate-400: rgba(26, 26, 26, 0.5);
+  --color-slate-500: rgba(26, 26, 26, 0.65);
+  --color-slate-600: rgba(26, 26, 26, 0.75);
+  --color-slate-700: #2D2D2D;
+  --color-slate-800: #1A1A1A;
+  --color-slate-900: #1A1A1A;
+
+  --color-indigo-50: #EAE7E0;
+  --color-indigo-100: #DCD8CF;
+  --color-indigo-200: rgba(26, 26, 26, 0.08);
+  --color-indigo-500: #1A1A1A;
+  --color-indigo-600: #1A1A1A;
+  --color-indigo-700: #2D2D2D;
+  --color-indigo-800: #1A1A1A;
+  --color-indigo-900: #1A1A1A;
+  --color-indigo-950: #151515;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@450;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&display=swap');
 
 /* Dynamic Interlocking Variables */
